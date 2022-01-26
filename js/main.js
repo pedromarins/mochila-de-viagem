@@ -1,13 +1,26 @@
-const form = document.getElementById("novoItem")
+const form = document.getElementById("novoCadastro")
+const lista = document.getElementById("lista")
+const inputNome = document.getElementById("nome")
+const inputQuantidade = document.getElementById("quantidade")
 
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
- 
-    const item = evento.target.elements['nome'].value;
-    const quantidade = evento.target.elements['quantidade'].value;
-
-    console.log(item, quantidade)
+    
+    criaElemento(inputNome.value, inputQuantidade.value)
 })
 
-// forma simples - console.log(evento.target[0].value)
-// forma dinâmica - console.log(evento.target.elements['nome'].value)
+function criaElemento(item, quantidade) {
+    const novoItem = document.createElement("li")
+    novoItem.classList.add("item")
+
+    const novaQuantidade = document.createElement("strong")
+    novaQuantidade.textContent = quantidade
+    novoItem.appendChild(novaQuantidade)
+    
+    novoItem.innerHTML += item
+
+    lista.appendChild(novoItem)
+
+    inputNome.value = ""
+    inputQuantidade.value = ""
+}
